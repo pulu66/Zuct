@@ -1,0 +1,105 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	studentsList
+	
+	Links : 	studentsEdit
+					/studentses/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="studentsListController">
+	
+	<h1>studentsList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="date_of_birth">Date_of_birth</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="date" ng-model="search.date_of_birth" class="form-control" name="date_of_birth" id="date_of_birth" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="first_name">First_name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.first_name" class="form-control" name="first_name" id="first_name" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="last_name">Last_name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.last_name" class="form-control" name="last_name" id="last_name" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="middle_name">Middle_name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.middle_name" class="form-control" name="middle_name" id="middle_name" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="phone">Phone</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="number" ng-model="search.phone" class="form-control" name="phone" id="phone" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="sex">Sex</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.sex" class="form-control" name="sex" id="sex" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>date_of_birth</th>
+				<th>first_name</th>
+				<th>last_name</th>
+				<th>middle_name</th>
+				<th>phone</th>
+				<th>sex</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  date_of_birth:dateFilter(search.date_of_birth),  first_name:search.first_name,  last_name:search.last_name,  middle_name:search.middle_name,  phone:search.phone,  sex:search.sex,  }">
+				<td ng-bind="item._id" ng-link="/studentses/{{item._id}}"></td>
+				<td ng-bind="item.date_of_birth | date"></td>
+				<td ng-bind="item.first_name"></td>
+				<td ng-bind="item.last_name"></td>
+				<td ng-bind="item.middle_name"></td>
+				<td ng-bind="item.phone"></td>
+				<td ng-bind="item.sex"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   date_of_birth:dateFilter(search.date_of_birth),  first_name:search.first_name,  last_name:search.last_name,  middle_name:search.middle_name,  phone:search.phone,  sex:search.sex,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/studentses/new">New</button>
+	
+</div>

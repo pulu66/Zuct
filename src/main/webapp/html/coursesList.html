@@ -1,0 +1,65 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	coursesList
+	
+	Links : 	coursesEdit
+					/courseses/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="coursesListController">
+	
+	<h1>coursesList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="course_code">Course_code</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.course_code" class="form-control" name="course_code" id="course_code" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="course_name">Course_name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.course_name" class="form-control" name="course_name" id="course_name" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>course_code</th>
+				<th>course_name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  course_code:search.course_code,  course_name:search.course_name,  }">
+				<td ng-bind="item._id" ng-link="/courseses/{{item._id}}"></td>
+				<td ng-bind="item.course_code"></td>
+				<td ng-bind="item.course_name"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   course_code:search.course_code,  course_name:search.course_name,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/courseses/new">New</button>
+	
+</div>

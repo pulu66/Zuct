@@ -1,0 +1,65 @@
+<!-- IMPORT MODULE DETAIL -->
+<!-- 
+
+	Module : 	programsList
+	
+	Links : 	programsEdit
+					/programses/{id}
+.				
+	
+	Nesteds : 	
+				
+-->
+<!-- /IMPORT MODULE DETAIL -->
+<div ng-controller="programsListController">
+	
+	<h1>programsList</h1>
+	
+	<!-- SEARCH FORM -->
+	<div class="well">
+	    <form name="form_search" class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="pr_description">Pr_description</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.pr_description" class="form-control" name="pr_description" id="pr_description" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3">
+					<label for="pr_name">Pr_name</label>
+				</div>
+				<div class="col-sm-9 form-group" >
+					<input type="text" ng-model="search.pr_name" class="form-control" name="pr_name" id="pr_name" >
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<!-- TABLE -->
+	<table class="table table-condensed table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>pr_description</th>
+				<th>pr_name</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="item in list | filter: {  pr_description:search.pr_description,  pr_name:search.pr_name,  }">
+				<td ng-bind="item._id" ng-link="/programses/{{item._id}}"></td>
+				<td ng-bind="item.pr_description"></td>
+				<td ng-bind="item.pr_name"></td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<div class="mb-20" ng-if="list.$resolved && (list | filter :{   pr_description:search.pr_description,  pr_name:search.pr_name,  }).length == 0">
+        <b>No result found</b>
+    </div>
+
+	<!-- BUTTON -->
+	<button class="btn btn-primary" ng-link="/programses/new">New</button>
+	
+</div>
